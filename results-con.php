@@ -1,0 +1,526 @@
+<?php
+
+session_start();
+
+include 'config.php';
+
+$profile=$_SESSION['aname'];
+
+
+$a_name='';
+$a_name2='';
+$a_name3='';
+$a_name4='';
+$a_name5='';
+$a_name6='';
+$a_name7='';
+$a_name8='';
+$a_name9='';
+$a_name10='';
+$a_name11='';
+$a_name12='';
+$a_name13='';
+
+
+
+
+if(isset($_POST['ADDarea']))
+{
+$areano=$_POST['areano'];
+$areaname=$_POST['areaname'];
+
+$result=$mysqli->query("SELECT * FROM areas WHERE  areano='$areano' && areaname='$areaname'") or die($mysqli->error());
+$row=$result->fetch_array();
+if($row==0)
+{
+    $query="INSERT INTO areas (areano,areaname) VALUES ('$areano','$areaname')";
+    mysqli_query($conn,$query);
+    echo "<script> alert('Area Added Successfully!'); window.location.href='areas.php'; </script>";
+
+}
+else
+{
+    echo "<script> alert('Area Already Present!'); window.location.href='areas.php'; </script>";
+
+}
+}
+?>
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+  <title>EMS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!--<link rel="stylesheet" href="css/style.css">-->
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			
+
+        <!-- Page Content  -->
+       <div id="content" class="p-4 p-md-5 pt-5">
+        <center><h2 class="mb-4">Tanzeem Election | Final Results!!</h2></center>
+       <center> <h4>Final Election Results! All Wards!</h4></center>
+
+        <br>
+       
+
+    
+
+           <?php
+
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='1' order by carea";
+            $result3=mysqli_query($conn,$query3);
+            
+            while($row=mysqli_fetch_object($result3))
+            { $a_name=$row->carea; }?>
+            <h5>Area-1 <?php echo $a_name; ?></h5>
+            <?php
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='1' order by carea,votes desc";
+            $result3=mysqli_query($conn,$query3);
+            while($row=mysqli_fetch_object($result3))
+             {?>
+            
+            <div style="margin-right:20px; width:30%; display:inline-block;"  class="alert alert-danger" role="alert">
+            <?php echo '<img style="border:2px solid black;" src="data:image/jpeg;base64,'.base64_encode($row->cimage).'" width="90" height="100"/>';?>
+             <p>Name: <?php echo $row->cname?><br>Area: <?php echo $row->carea?><!--Address: <?php echo $row->caddress?><br>Mob: <?php echo $row->cmob?>--><br></p>
+             
+             <!--  -->
+
+             Votes: <button style="font-size:20px;" class="btn btn-success"> <?php echo $row->votes;?> </button>           <!--  This is for the EDIT button     -->
+
+             <!--<a style="font-size:12px;" class="btn btn-success" href="candidates_edit.php?edit=<?php echo $row->id?>"> Edit </a>            This is for the EDIT button     
+             <a style="font-size:12px;" class="btn btn-danger" href="candidates_edit.php?delete=<?php echo $row->id?>"> Delete </a>  
+             --></div>
+            <?php 
+            }
+
+        ?>
+
+
+
+<hr>
+
+<!--
+        <?php
+
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='2' order by carea";
+            $result3=mysqli_query($conn,$query3);
+            
+            while($row=mysqli_fetch_object($result3))
+            { $a_name2=$row->carea; }?>
+            <h5>Area-2 <?php echo $a_name2; ?></h5>
+            <?php
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='2' order by carea,votes desc";
+            $result3=mysqli_query($conn,$query3);
+            while($row=mysqli_fetch_object($result3))
+             {?>
+            
+            <div style="margin-right:20px; width:30%; display:inline-block;"  class="alert alert-danger" role="alert">
+            <?php echo '<img style="border:2px solid black;" src="data:image/jpeg;base64,'.base64_encode($row->cimage).'" width="90" height="100"/>';?>
+             <p>Name: <?php echo $row->cname?><br>Area: <?php echo $row->carea?><br>Address: <?php echo $row->caddress?><br>Mob: <?php echo $row->cmob?></p>
+             
+             Votes: <button style="font-size:20px;" class="btn btn-success"> <?php echo $row->votes;?> </button>           <!--  This is for the EDIT button     -->
+
+             <!--<a style="font-size:12px;" class="btn btn-success" href="candidates_edit.php?edit=<?php echo $row->id?>"> Edit </a>            This is for the EDIT button     
+             <a style="font-size:12px;" class="btn btn-danger" href="candidates_edit.php?delete=<?php echo $row->id?>"> Delete </a>  
+             --></div>
+            <?php 
+            }
+
+        ?>-->
+
+
+
+<!--
+
+ <?php
+
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='3' order by carea";
+            $result3=mysqli_query($conn,$query3);
+            
+            while($row=mysqli_fetch_object($result3))
+            { $a_name3=$row->carea; }?>
+            <h5>Area-3 <?php echo $a_name3; ?></h5>
+            <?php
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='3' order by carea,votes desc";
+            $result3=mysqli_query($conn,$query3);
+            while($row=mysqli_fetch_object($result3))
+             {?>
+            
+            <div style="margin-right:20px; width:30%; display:inline-block;"  class="alert alert-danger" role="alert">
+            <?php echo '<img style="border:2px solid black;" src="data:image/jpeg;base64,'.base64_encode($row->cimage).'" width="90" height="100"/>';?>
+             <p>Name: <?php echo $row->cname?><br>Area: <?php echo $row->carea?><br>Address: <?php echo $row->caddress?><br>Mob: <?php echo $row->cmob?></p>
+             
+             Votes: <button style="font-size:20px;" class="btn btn-success"> <?php echo $row->votes;?> </button>           <!--  This is for the EDIT button     -->
+
+             <!--<a style="font-size:12px;" class="btn btn-success" href="candidates_edit.php?edit=<?php echo $row->id?>"> Edit </a>            This is for the EDIT button     
+             <a style="font-size:12px;" class="btn btn-danger" href="candidates_edit.php?delete=<?php echo $row->id?>"> Delete </a>  
+             --></div>
+            <?php 
+            }
+
+        ?>
+-->
+
+
+
+
+
+
+
+<!--
+
+      <?php
+
+            $query4="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='4' order by carea";
+            $result4=mysqli_query($conn,$query4);
+            
+            while($row=mysqli_fetch_object($result4))
+            { $a_name4=$row->carea; }?>
+            <h5>Area-4 <?php echo $a_name4; ?></h5>
+            <?php
+            $query4="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='4' order by carea,votes desc";
+            $result4=mysqli_query($conn,$query4);
+            while($row=mysqli_fetch_object($result4))
+             {?>
+            
+            <div style="margin-right:20px; width:30%; display:inline-block;"  class="alert alert-danger" role="alert">
+            <?php echo '<img style="border:2px solid black;" src="data:image/jpeg;base64,'.base64_encode($row->cimage).'" width="90" height="100"/>';?>
+             <p>Name: <?php echo $row->cname?><br>Area: <?php echo $row->carea?><br>Address: <?php echo $row->caddress?><br>Mob: <?php echo $row->cmob?></p>
+             
+             Votes: <button style="font-size:20px;" class="btn btn-success"> <?php echo $row->votes;?> </button>           <!--  This is for the EDIT button     -->
+
+             <!--<a style="font-size:12px;" class="btn btn-success" href="candidates_edit.php?edit=<?php echo $row->id?>"> Edit </a>            This is for the EDIT button     
+             <a style="font-size:12px;" class="btn btn-danger" href="candidates_edit.php?delete=<?php echo $row->id?>"> Delete </a>  
+             --></div>
+            <?php 
+            }
+        ?>-->
+
+
+<!--
+
+       <?php
+
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='5' order by carea";
+            $result3=mysqli_query($conn,$query3);
+            
+            while($row=mysqli_fetch_object($result3))
+            { $a_name5=$row->carea; }?>
+            <h5>Area-5 <?php echo $a_name5; ?></h5>
+            <?php
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='5' order by carea,votes desc";
+            $result3=mysqli_query($conn,$query3);
+            while($row=mysqli_fetch_object($result3))
+             {?>
+            
+            <div style="margin-right:20px; width:30%; display:inline-block;"  class="alert alert-danger" role="alert">
+            <?php echo '<img style="border:2px solid black;" src="data:image/jpeg;base64,'.base64_encode($row->cimage).'" width="90" height="100"/>';?>
+             <p>Name: <?php echo $row->cname?><br>Area: <?php echo $row->carea?><br>Address: <?php echo $row->caddress?><br>Mob: <?php echo $row->cmob?></p>
+             
+             Votes: <button style="font-size:20px;" class="btn btn-success"> <?php echo $row->votes;?> </button>           <!--  This is for the EDIT button     -->
+
+             <!--<a style="font-size:12px;" class="btn btn-success" href="candidates_edit.php?edit=<?php echo $row->id?>"> Edit </a>            This is for the EDIT button     
+             <a style="font-size:12px;" class="btn btn-danger" href="candidates_edit.php?delete=<?php echo $row->id?>"> Delete </a>  
+             --></div>
+            <?php 
+            }
+
+        ?>
+
+
+          -->
+
+
+
+<!--
+
+ <?php
+
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='6' order by carea";
+            $result3=mysqli_query($conn,$query3);
+            
+            while($row=mysqli_fetch_object($result3))
+            { $a_name6=$row->carea; }?>
+            <h5>Area-6 <?php echo $a_name6; ?></h5>
+            <?php
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='6' order by carea,votes desc";
+            $result3=mysqli_query($conn,$query3);
+            while($row=mysqli_fetch_object($result3))
+             {?>
+            
+            <div style="margin-right:20px; width:30%; display:inline-block;"  class="alert alert-danger" role="alert">
+            <?php echo '<img style="border:2px solid black;" src="data:image/jpeg;base64,'.base64_encode($row->cimage).'" width="90" height="100"/>';?>
+             <p>Name: <?php echo $row->cname?><br>Area: <?php echo $row->carea?><br>Address: <?php echo $row->caddress?><br>Mob: <?php echo $row->cmob?></p>
+             
+             Votes: <button style="font-size:20px;" class="btn btn-success"> <?php echo $row->votes;?> </button>           <!--  This is for the EDIT button     -->
+
+             <!--<a style="font-size:12px;" class="btn btn-success" href="candidates_edit.php?edit=<?php echo $row->id?>"> Edit </a>            This is for the EDIT button     
+             <a style="font-size:12px;" class="btn btn-danger" href="candidates_edit.php?delete=<?php echo $row->id?>"> Delete </a>  
+             --></div>
+            <?php 
+            }
+
+        ?>
+
+          -->
+
+
+
+
+
+<br>
+       
+
+    
+
+           <?php
+
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='7' order by carea";
+            $result3=mysqli_query($conn,$query3);
+            
+            while($row=mysqli_fetch_object($result3))
+            { $a_name7=$row->carea; }?>
+            <h5>Area-7 <?php echo $a_name7; ?></h5>
+            <?php
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='7' order by carea,votes desc";
+            $result3=mysqli_query($conn,$query3);
+            while($row=mysqli_fetch_object($result3))
+             {?>
+            
+            <div style="margin-right:20px; width:30%; display:inline-block;"  class="alert alert-danger" role="alert">
+            <?php echo '<img style="border:2px solid black;" src="data:image/jpeg;base64,'.base64_encode($row->cimage).'" width="90" height="100"/>';?>
+             <p>Name: <?php echo $row->cname?><br>Area: <?php echo $row->carea?><br>Address: <?php echo $row->caddress?><br>Mob: <?php echo $row->cmob?></p>
+             
+             Votes: <button style="font-size:20px;" class="btn btn-success"> <?php echo $row->votes;?> </button>           <!--  This is for the EDIT button     -->
+
+             <!--<a style="font-size:12px;" class="btn btn-success" href="candidates_edit.php?edit=<?php echo $row->id?>"> Edit </a>            This is for the EDIT button     
+             <a style="font-size:12px;" class="btn btn-danger" href="candidates_edit.php?delete=<?php echo $row->id?>"> Delete </a>  
+             --></div>
+            <?php 
+            }
+
+        ?>
+
+
+
+<hr>
+
+
+        <?php
+
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='8' order by carea";
+            $result3=mysqli_query($conn,$query3);
+            
+            while($row=mysqli_fetch_object($result3))
+            { $a_name8=$row->carea; }?>
+            <h5>Area-8 <?php echo $a_name8; ?></h5>
+            <?php
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='8' order by carea,votes desc";
+            $result3=mysqli_query($conn,$query3);
+            while($row=mysqli_fetch_object($result3))
+             {?>
+            
+            <div style="margin-right:20px; width:30%; display:inline-block;"  class="alert alert-danger" role="alert">
+            <?php echo '<img style="border:2px solid black;" src="data:image/jpeg;base64,'.base64_encode($row->cimage).'" width="90" height="100"/>';?>
+             <p>Name: <?php echo $row->cname?><br>Area: <?php echo $row->carea?><br>Address: <?php echo $row->caddress?><br>Mob: <?php echo $row->cmob?></p>
+             
+             Votes: <button style="font-size:20px;" class="btn btn-success"> <?php echo $row->votes;?> </button>           <!--  This is for the EDIT button     -->
+
+             <!--<a style="font-size:12px;" class="btn btn-success" href="candidates_edit.php?edit=<?php echo $row->id?>"> Edit </a>            This is for the EDIT button     
+             <a style="font-size:12px;" class="btn btn-danger" href="candidates_edit.php?delete=<?php echo $row->id?>"> Delete </a>  
+             --></div>
+            <?php 
+            }
+
+        ?>
+
+
+
+<hr>
+
+
+ <?php
+
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='9' order by carea";
+            $result3=mysqli_query($conn,$query3);
+            
+            while($row=mysqli_fetch_object($result3))
+            { $a_name9=$row->carea; }?>
+            <h5>Area-9 <?php echo $a_name9; ?></h5>
+            <?php
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='9' order by carea,votes desc";
+            $result3=mysqli_query($conn,$query3);
+            while($row=mysqli_fetch_object($result3))
+             {?>
+            
+            <div style="margin-right:20px; width:30%; display:inline-block;"  class="alert alert-danger" role="alert">
+            <?php echo '<img style="border:2px solid black;" src="data:image/jpeg;base64,'.base64_encode($row->cimage).'" width="90" height="100"/>';?>
+             <p>Name: <?php echo $row->cname?><br>Area: <?php echo $row->carea?><br>Address: <?php echo $row->caddress?><br>Mob: <?php echo $row->cmob?></p>
+             
+             Votes: <button style="font-size:20px;" class="btn btn-success"> <?php echo $row->votes;?> </button>           <!--  This is for the EDIT button     -->
+
+             <!--<a style="font-size:12px;" class="btn btn-success" href="candidates_edit.php?edit=<?php echo $row->id?>"> Edit </a>            This is for the EDIT button     
+             <a style="font-size:12px;" class="btn btn-danger" href="candidates_edit.php?delete=<?php echo $row->id?>"> Delete </a>  
+             --></div>
+            <?php 
+            }
+
+        ?>
+
+
+
+
+
+
+
+<hr>
+
+
+      <?php
+
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='10' order by carea,votes desc";
+            $result3=mysqli_query($conn,$query3);
+            
+            while($row=mysqli_fetch_object($result3))
+            { $a_name10=$row->carea; }?>
+            <h5>Area-10 <?php echo $a_name10; ?></h5>
+            <?php
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='10' order by carea";
+            $result3=mysqli_query($conn,$query3);
+            while($row=mysqli_fetch_object($result3))
+             {?>
+            
+            <div style="margin-right:20px; width:30%; display:inline-block;"  class="alert alert-danger" role="alert">
+            <?php echo '<img style="border:2px solid black;" src="data:image/jpeg;base64,'.base64_encode($row->cimage).'" width="90" height="100"/>';?>
+             <p>Name: <?php echo $row->cname?><br>Area: <?php echo $row->carea?><br>Address: <?php echo $row->caddress?><br>Mob: <?php echo $row->cmob?></p>
+             
+             Votes: <button style="font-size:20px;" class="btn btn-success"> <?php echo $row->votes;?> </button>           <!--  This is for the EDIT button     -->
+
+             <!--<a style="font-size:12px;" class="btn btn-success" href="candidates_edit.php?edit=<?php echo $row->id?>"> Edit </a>            This is for the EDIT button     
+             <a style="font-size:12px;" class="btn btn-danger" href="candidates_edit.php?delete=<?php echo $row->id?>"> Delete </a>  
+             --></div>
+            <?php 
+            }
+
+        ?>
+
+
+<hr>
+
+<!--
+
+       <?php
+
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='11' order by carea";
+            $result3=mysqli_query($conn,$query3);
+            
+            while($row=mysqli_fetch_object($result3))
+            { $a_name11=$row->carea; }?>
+            <h5>Area-11 <?php echo $a_name11; ?></h5>
+            <?php
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='11' order by carea,votes desc";
+            $result3=mysqli_query($conn,$query3);
+            while($row=mysqli_fetch_object($result3))
+             {?>
+            
+            <div style="margin-right:20px; width:30%; display:inline-block;"  class="alert alert-danger" role="alert">
+            <?php echo '<img style="border:2px solid black;" src="data:image/jpeg;base64,'.base64_encode($row->cimage).'" width="90" height="100"/>';?>
+             <p>Name: <?php echo $row->cname?><br>Area: <?php echo $row->carea?><br>Address: <?php echo $row->caddress?><br>Mob: <?php echo $row->cmob?></p>
+             
+             Votes: <button style="font-size:20px;" class="btn btn-success"> <?php echo $row->votes;?> </button>           <!--  This is for the EDIT button     -->
+
+             <!--<a style="font-size:12px;" class="btn btn-success" href="candidates_edit.php?edit=<?php echo $row->id?>"> Edit </a>            This is for the EDIT button     
+             <a style="font-size:12px;" class="btn btn-danger" href="candidates_edit.php?delete=<?php echo $row->id?>"> Delete </a>  
+             --></div>
+            <?php 
+            }
+
+        ?>
+
+
+          -->
+
+
+ <?php
+
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='12' order by carea";
+            $result3=mysqli_query($conn,$query3);
+            
+            while($row=mysqli_fetch_object($result3))
+            { $a_name12=$row->carea; }?>
+            <h5>Area-12 <?php echo $a_name12; ?></h5>
+            <?php
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='12' order by carea,votes desc";
+            $result3=mysqli_query($conn,$query3);
+            while($row=mysqli_fetch_object($result3))
+             {?>
+            
+            <div style="margin-right:20px; width:30%; display:inline-block;"  class="alert alert-danger" role="alert">
+            <?php echo '<img style="border:2px solid black;" src="data:image/jpeg;base64,'.base64_encode($row->cimage).'" width="90" height="100"/>';?>
+             <p>Name: <?php echo $row->cname?><br>Area: <?php echo $row->carea?><br>Address: <?php echo $row->caddress?><br>Mob: <?php echo $row->cmob?></p>
+             
+             Votes: <button style="font-size:20px;" class="btn btn-success"> <?php echo $row->votes;?> </button>           <!--  This is for the EDIT button     -->
+
+             <!--<a style="font-size:12px;" class="btn btn-success" href="candidates_edit.php?edit=<?php echo $row->id?>"> Edit </a>            This is for the EDIT button     
+             <a style="font-size:12px;" class="btn btn-danger" href="candidates_edit.php?delete=<?php echo $row->id?>"> Delete </a>  
+             --></div>
+            <?php 
+            }
+
+        ?>
+
+
+
+
+<!--
+
+
+ <?php
+
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='13' order by carea";
+            $result3=mysqli_query($conn,$query3);
+            
+            while($row=mysqli_fetch_object($result3))
+            { $a_name13=$row->carea; }?>
+            <h5>Area-13 <?php echo $a_name13; ?></h5>
+            <?php
+            $query3="SELECT * FROM candidates_info,areas where candidates_info.carea=areas.areaname2 && areas.areaname='13' order by carea,votes desc";
+            $result3=mysqli_query($conn,$query3);
+            while($row=mysqli_fetch_object($result3))
+             {?>
+            
+            <div style="margin-right:20px; width:30%; display:inline-block;"  class="alert alert-danger" role="alert">
+            <?php echo '<img style="border:2px solid black;" src="data:image/jpeg;base64,'.base64_encode($row->cimage).'" width="90" height="100"/>';?>
+             <p>Name: <?php echo $row->cname?><br>Area: <?php echo $row->carea?><br>Address: <?php echo $row->caddress?><br>Mob: <?php echo $row->cmob?></p>
+             
+             Votes: <button style="font-size:20px;" class="btn btn-success"> <?php echo $row->votes;?> </button>           <!--  This is for the EDIT button     -->
+
+             <!--<a style="font-size:12px;" class="btn btn-success" href="candidates_edit.php?edit=<?php echo $row->id?>"> Edit </a>            This is for the EDIT button     
+             <a style="font-size:12px;" class="btn btn-danger" href="candidates_edit.php?delete=<?php echo $row->id?>"> Delete </a>  
+             --></div>
+            <?php 
+            }
+        ?>
+
+
+          -->
+
+
+      </div>
+		</div>
+
+   <!-- <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>-->
+  </body>
+</html>
